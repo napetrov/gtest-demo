@@ -25,7 +25,10 @@ jobs:
     vmImage: 'windows-latest'
 
   steps:
-  - script: mkdir build; cd build; cmake .. ; cmake --build .
+  - script: mkdir build 
+  - script: cd build 
+  - script: cmake ..
+  - script: cmake --build .
     displayName: 'Build win'
 
   - script: cd build; ctest
