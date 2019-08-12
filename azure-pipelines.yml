@@ -5,14 +5,25 @@
 
 trigger:
 - master
+jobs:
+- job: Linux
+  pool:
+    vmImage: 'ubuntu-latest'
 
-pool:
-  vmImage: 'ubuntu-latest'
+  steps:
+  - script: mkdir build; cd build; cmake .. ; cmake --build .
+    displayName: 'Build'
 
-steps:
-- script: mkdir build; cd build; cmake .. ; cmake --build .
-  displayName: 'Build'
+  - script: cd build; ctest
+    displayName: 'Run testing'
 
-- script: cd build; ctest
-  displayName: 'Run testing'
+- job: Windows
+  pool:
+    vmImage: 'windows-latest'
 
+  steps:
+  - script: mkdir build; cd build; cmake .. ; cmake --build .
+    displayName: 'Build'
+
+  - script: cd build; ctest
+    displayName: 'Run testing'
