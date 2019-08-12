@@ -11,7 +11,7 @@ pool:
 
 steps:
 - script: mkdir build; cd build; cmake .. ; cmake --build .
-  displayName: 'Build'
+  displayName: 'Build product'
 
 - script: cd build; ctest
   displayName: 'Run testing'
