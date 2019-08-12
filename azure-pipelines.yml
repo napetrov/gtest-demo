@@ -10,7 +10,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: lscpu; mkdir build; cd build; cmake .. ; cmake --build .
+- script: lscpu
+  displayName: 'Redundant action. Show info about Azure machine.'
+
+- script: mkdir build; cd build; cmake .. ; cmake --build .
   displayName: 'Build'
 
 - script: cd build; ctest
