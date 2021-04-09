@@ -6,14 +6,24 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
+jobs:
+- job: Linux
+  pool:
+    vmImage: ubuntu-latest
+  strategy:
+    matrix:
+      lnx32e:
+        platform.type : 'lnx32e'
+  steps:
+  - script: echo ${$(platform.type):3} ; echo ""; echo $(platform.type)
+  - script: lscpu
+    displayName: 'Redundant action. Show info about Azure machine.'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - script: gcc -v; sudo apt-get update && sudo apt-get install gcc-multilib g++-multilib; gcc -v
+    displayName: 'show gcc version'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - script: mkdir build; cd build; cmake .. ; cmake --build .
+    displayName: 'Build'
+
+  - script: cd build; ctest
+    displayName: 'Run testing'
